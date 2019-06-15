@@ -1,0 +1,23 @@
+
+Asus "The new PadFone Infinity" A86 (T004) Unlock Instructions:
+
+Pull the "aboot"-partition by either rooting the device or by getting it into the MSM-Mode (/dev/sd?5) e.g. by fastboot boot'ing a corrupt kernel.
+Be sure to make a backup of it.
+Open it in a hex editor and go to offset 0x4ffe00 (signature "ANDROID-BOOT!", the last occurrence of the string)
+Set unlocked and authorized to 0x1, and tampered to 0x0.
+Write it back.
+Have fun!
+
+All values are DWORD's little-endian.
+
+base=0x4ffe00
+base+0x10 == unlocked
+base+0x14 == tampered
+base+0x18 == Charger screen enabled
+base+0x5c == authorized
+base+0x60 == cpu pvs
+base+0x64 == cpu overclocking
+base+0x68 == boot count
+
+
+
