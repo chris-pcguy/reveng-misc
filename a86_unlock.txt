@@ -5,7 +5,7 @@ Pull the "aboot"-partition by either rooting the device or by getting it into th
 Be sure to make a backup of it.
 Open it in a hex editor and go to offset 0x4ffe00 (signature "ANDROID-BOOT!", the last occurrence of the string)
 Set unlocked and authorized to 0x1, and tampered to 0x0.
-Write it back.
+Write it back. (especially for writing, use dd's flag bs=2048 !)
 Have fun!
 
 All values are DWORD's little-endian.
@@ -19,5 +19,30 @@ base+0x60 == cpu pvs
 base+0x64 == cpu overclocking
 base+0x68 == boot count
 
+
+---
+
+Enabling/Disabling SELinux enforcing (at least for the recovery image)
+Kernel CMDLINE append: "UNLOCKED=Y" (this also enables "adb root")
+echo 0 > /sys/fs/selinux/enforce
+echo asussetenforce:0 > /proc/rd
+
+
+---
+
+./drivers/media/platform/msm/camera_v2/sensor/iCatch7002a.c:3684
+#ifndef ASUS_SHIP_BUILD
+            exif_bytes = 24;
+            sensor_read_reg_bytes(mt9m114_s_ctrl.sensor_i2c_client->client, 0x72d8, info_3a_data, exif_bytes); 
+            memcpy(exif->info_3a, info_3a_data, 24);
+#endif
+
+What is this for and why is it only in user-builds?
+
+---
+
+what is SEL_APS in SELinux?
+
+---
 
 
