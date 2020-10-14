@@ -5,7 +5,7 @@ Pull the "aboot"-partition by either rooting the device or by getting it into th
 Be sure to make a backup of it.
 Open it in a hex editor and go to offset 0x4ffe00 (signature "ANDROID-BOOT!", the last occurrence of the string)
 Set unlocked and authorized to 0x1, and tampered to 0x0.
-Write it back. (especially for writing, use dd's flag bs=2048 !)
+Write it back. (especially for writing, use dd's flags bs=2048 oflag=sync !)
 Have fun!
 
 All values are DWORD's little-endian.
@@ -45,4 +45,17 @@ what is SEL_APS in SELinux?
 
 ---
 
+Recovering A86 from "QHSUSB__BULK (9008)":
+Put a full dump on a MicroSD card and insert it. This should let it switch to MSM-Mode.
+In MSM-Mode: (/dev/sd?*)
+If you want to make it run without the MicroSD card: Put everything to the internal eMMC storage.
+If not (only works with inserted MicroSD card): Put the first 2 Megabytes (or so) to the internal eMMC storage. 'fastboot boot' may reboot immediately if the battery is disconnected, but 'fastboot flash' seems to work.
 
+P.S.:
+You may have to disconnect the battery if you see "device descriptor read/64, error"-like messages.
+
+---
+
+Is there a way to recover the phone without soldering if aboot is flawed?
+
+---
