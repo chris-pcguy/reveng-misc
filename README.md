@@ -12,4 +12,7 @@ HP Probook 470 G1 UEFI L74 Ver. 01.47 from 2018-07-30 (latest, as of 2019-05-11)
 HP's Automatic DriveLock is vulnerable to a hotplug attack. The DriveLock password gets sent to the harddisk before an user enters his password. <br />
 HP's Automatic DriveLock password is stored in the NVRAM variable "HP_AUTODL" (offset 0x14, len 0x20) and encoded with a weak "cipher". (xor 0x5a, rol 4, xor 0x66) <br />
 HP's UEFI admin password is converted to scancodes, hashed with SHA1 and stored in the NVRAM variable "HP_BIOSAdminScanCode" <br />
+ <br />
+Flipper Zero workaround for some undetectable iButtons: 4.4k pull-up resistor between 3.3V and 1W (pins 9 and 17). YMMV. <br />
+ <br />
 
